@@ -25,12 +25,12 @@ public class TaskController {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "updateTask")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
     public TaskDto updateTask(TaskDto taskDto) {
         return new TaskDto((long) 1, "Edited test title", "test_content");
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "createTask")
+    @RequestMapping(method = RequestMethod.POST, value = "createTask")
     public void createTask(TaskDto taskDto) {
 
     }
