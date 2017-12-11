@@ -15,30 +15,23 @@ public class TaskController {
         return new ArrayList<>();
     }
 
-    @RequestMapping(method = RequestMethod.GET,
-            value = "getTask",
-            params = "taskId")
-    public TaskDto getTask(@RequestParam("taskId") String taskId) {
+    @RequestMapping(method = RequestMethod.GET, value = "getTask")
+    public TaskDto getTask(String taskId) {
         return new TaskDto((long) 1, "test title", "Test content");
     }
 
-    @RequestMapping(method = RequestMethod.DELETE,
-            params = "taskId")
-    public void deleteTask(@RequestParam("taskId") String taskId) {
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
+    public void deleteTask(String taskId) {
 
     }
 
-    @RequestMapping(method = RequestMethod.POST,
-            value = "updateTask",
-            params = "taskDto")
-    public TaskDto updateTask(@RequestParam("taskDto") TaskDto taskDto) {
+    @RequestMapping(method = RequestMethod.POST, value = "updateTask")
+    public TaskDto updateTask(TaskDto taskDto) {
         return new TaskDto((long) 1, "Edited test title", "test_content");
     }
 
-    @RequestMapping(method = RequestMethod.PUT,
-            value = "createTask",
-            params = "taskDto")
-    public void createTask(@RequestParam("taskDto") TaskDto taskDto) {
+    @RequestMapping(method = RequestMethod.PUT, value = "createTask")
+    public void createTask(TaskDto taskDto) {
 
     }
 }
