@@ -1,5 +1,6 @@
 package com.crud.tasks.config;
 
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -7,9 +8,13 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Collections;
 
 @EnableSwagger2
 @Configuration
@@ -27,7 +32,18 @@ public class CoreConfiguration implements WebMvcConfigurer{
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.crud.tasks.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                .apiInfo(apiInfo());
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfo(
+                "My REST API",
+                "My 1st REST API created during Kodilla course.",
+                "API_1.0",
+                "Terms of service",
+                new Contact("Paulina Kuzmicka", "paulinakuzmicka.github.io", "paulina.kuzmicka@gmail.com"),
+                "License of API", "API license URL", Collections.emptyList());
     }
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
