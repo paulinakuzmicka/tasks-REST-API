@@ -42,8 +42,8 @@ public class CoreConfiguration implements WebMvcConfigurer{
                 "My 1st REST API created during Kodilla course.",
                 "API_1.0",
                 "Terms of service",
-                new Contact("Paulina Kuzmicka", "paulinakuzmicka.github.io", "paulina.kuzmicka@gmail.com"),
-                "License of API", "API license URL", Collections.emptyList());
+                new Contact("Paulina Kuzmicka", "http://paulinakuzmicka.github.io", "paulina.kuzmicka@gmail.com"),
+                "", "", Collections.emptyList());
     }
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
