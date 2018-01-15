@@ -3,6 +3,7 @@ package com.crud.tasks.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -16,6 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
+@EnableScheduling
 @EnableSwagger2
 @Configuration
 public class CoreConfiguration implements WebMvcConfigurer{
@@ -42,7 +44,7 @@ public class CoreConfiguration implements WebMvcConfigurer{
                 "My 1st REST API created during Kodilla course.",
                 "API_1.0",
                 "Terms of service",
-                new Contact("Paulina Kuzmicka", "http://paulinakuzmicka.github.io", "paulina.kuzmicka@gmail.com"),
+                new Contact("Paulina Kuzmicka", "http://paulinakuzmicka.github.io", "${admin.mail}"),
                 "", "", Collections.emptyList());
     }
 
