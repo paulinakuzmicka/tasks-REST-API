@@ -38,7 +38,7 @@ public class CoreConfiguration implements WebMvcConfigurer{
                 .apis(RequestHandlerSelectors.basePackage("com.crud.tasks.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                .pathProvider(new BasePathAwareRelativePathProvider("/api/12321"))
+                .pathProvider(new BasePathAwareRelativePathProvider("http://paulinakuzmicka.github.io"))
                 .apiInfo(apiInfo());
     }
 
