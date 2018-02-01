@@ -8,8 +8,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import com.crud.tasks.domain.Mail;
+import org.mockito.ArgumentMatcher;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,6 +40,29 @@ public class EmailSchedulerTest {
         emailScheduler.sendInformationEmail();
 
         //Then
-        verify(simpleEmailService, times(1)).send(any());
+        verify(simpleEmailService, times(1)).
+                send(argThat(
+                        new MailMatcher(
+                                new Mail("mail@mail.com", "", ""))));
+    }
+
+    private class MailMatcher implements ArgumentMatcher<Mail> {
+        private final Mail expected;
+
+        public MailMatcher(Mail expected) {
+            this.expected = expected;
+        }
+
+        @Override
+        public boolean matches(Mail mail) {
+            return mail.getMailTo().equals(expected.getMailTo());
+        }
     }
 }
+
+
+
+
+
+
+
