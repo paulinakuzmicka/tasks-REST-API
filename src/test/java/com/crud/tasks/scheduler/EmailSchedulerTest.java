@@ -1,6 +1,7 @@
 package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
+import com.crud.tasks.repository.TaskRepository;
 import com.crud.tasks.service.SimpleEmailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,26 +14,30 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 public class EmailSchedulerTest {
-//    @InjectMocks
-//    private EmailScheduler emailScheduler;
-//
-//    @Mock
-//    private SimpleEmailService simpleEmailService;
-//
-//    @Mock
-//    private AdminConfig adminConfig;
-//
-//    @Test
-//    public void sendInformationEmailTest() {
-//        //Given
-//        when(adminConfig.getAdminMail()).thenReturn("mail@mail.com");
-//
-//        //When
-//        emailScheduler.sendInformationEmail();
-//
-//        //Then
-//        verify(simpleEmailService, times(1)).send(any());
-//    }
+    @InjectMocks
+    private EmailScheduler emailScheduler;
+
+    @Mock
+    private SimpleEmailService simpleEmailService;
+
+    @Mock
+    private AdminConfig adminConfig;
+
+    @Mock
+    private TaskRepository taskRepository;
+
+    @Test
+    public void sendInformationEmailTest() {
+        //Given
+        when(adminConfig.getAdminMail()).thenReturn("mail@mail.com");
+        when(taskRepository.count()).thenReturn(5L);
+
+        //When
+        emailScheduler.sendInformationEmail();
+
+        //Then
+        verify(simpleEmailService, times(1)).send(any());
+    }
 }
