@@ -71,9 +71,17 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$[0].content", is("Test content")));
     }
 
-    @Test//(expected = TaskNotFoundException.class)
+    @Test
     public void shouldFetchTaskWhichDoesNotExist() throws Exception {
+        //Given
+            when(service.getTask(1L)).thenReturn(Optional.empty());
 
+        //When & Then
+        mockMvc.perform(get("/v1/task/getTask")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .param("taskId", "1"))
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -98,7 +106,15 @@ public class TaskControllerTest {
 
     @Test
     public void shouldDeleteTaskWhichDoesNotExist() throws Exception {
+        //Given
+        when(service.getTask(1L)).thenReturn(Optional.empty());
 
+        //When & Then
+        mockMvc.perform(delete("/v1/task/deleteTask")
+                .contentType(MediaType.APPLICATION_JSON)
+                .characterEncoding("UTF-8")
+                .param("taskId", "1"))
+                .andExpect(status().is(404));
     }
 
     @Test
