@@ -16,29 +16,15 @@
 <!--/*thumesVar id="two" type="com.crud.tasks.controller.StaticWebPageController"*/-->
 <!--/*thumesVar id="computationVariable" type="com.crud.tasks.controller.StaticWebPageController"*/-->
 
-
-<span th:text="${computationVariable}"></span>
-<span> * </span>
-<span th:text="${computationVariable}"></span>
-<span> = </span>
+<span th:inline="text" >[[${computationVariable}]] * [[${computationVariable}]] = </span>
 <span th:text="${computationVariable} * ${computationVariable}"></span>
 
 <br>
-<span th:text="${computationVariable}"></span>
-<span> * </span>
-<span th:text="${computationVariable}"></span>
-<span> + </span>
-<span th:text="${computationVariable}"></span>
-<span> = </span>
+<span th:inline="text" >[[${computationVariable}]] * [[${computationVariable}]] + [[${computationVariable}]] = </span>
 <span th:text="${computationVariable} * ${computationVariable} + ${computationVariable}"></span>
 
 <br>
-<span th:text="${computationVariable}"></span>
-<span> - </span>
-<span th:text="${computationVariable}"></span>
-<span> * </span>
-<span th:text="${computationVariable}"></span>
-<span> = </span>
+<span th:inline="text" >[[${computationVariable}]] - [[${computationVariable}]] * [[${computationVariable}]] = </span>
 <span th:text="${computationVariable} - ${computationVariable} * ${computationVariable}"></span>
 
 </body>
