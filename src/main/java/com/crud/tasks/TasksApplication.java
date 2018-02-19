@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 
 @SpringBootApplication
 
-public class TasksApplication  extends SpringBootServletInitializer{
+public class TasksApplication {//} extends SpringBootServletInitializer{
 
 
     public static void main(String[] args) {
@@ -15,9 +15,9 @@ public class TasksApplication  extends SpringBootServletInitializer{
     }
 
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
-        return application.sources(TasksApplication.class);
-    }
+//    @Override
+//    protected SpringApplicationBuilder configure(SpringApplicationBuilder application){
+//        return application.sources(TasksApplication.class);
+//    }
 
 }
