@@ -2,6 +2,7 @@ package com.crud.tasks.scheduler;
 
 import com.crud.tasks.config.AdminConfig;
 import com.crud.tasks.repository.TaskRepository;
+import com.crud.tasks.service.EmailTemplateSelector;
 import com.crud.tasks.service.SimpleEmailService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,7 +44,8 @@ public class EmailSchedulerTest {
         verify(simpleEmailService, times(1)).
                 send(argThat(
                         new MailMatcher(
-                                new Mail("mail@mail.com", "", ""))));
+                                new Mail("mail@mail.com", "", ""))),
+                        argThat(new EmailTemplateSelectorMatcher(EmailTemplateSelector.SCHEDULED_EMAIL)));
     }
 
     private class MailMatcher implements ArgumentMatcher<Mail> {
@@ -56,6 +58,20 @@ public class EmailSchedulerTest {
         @Override
         public boolean matches(Mail mail) {
             return mail.getMailTo().equals(expected.getMailTo());
+        }
+    }
+
+    private class EmailTemplateSelectorMatcher implements ArgumentMatcher<EmailTemplateSelector>{
+
+        private final EmailTemplateSelector selector;
+
+        public EmailTemplateSelectorMatcher(EmailTemplateSelector selector) {
+            this.selector = selector;
+        }
+
+        @Override
+        public boolean matches(EmailTemplateSelector selectorMatcher) {
+            return selectorMatcher.equals(selector);
         }
     }
 }
