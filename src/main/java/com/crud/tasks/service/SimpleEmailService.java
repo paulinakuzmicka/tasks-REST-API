@@ -39,12 +39,17 @@ public class SimpleEmailService {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            if (template.compareTo(EmailTemplateSelector.SCHEDULED_EMAIL) == 0) {
-                messageHelper.setText(mailCreatorService.buildScheduledEmail(mail.getMessage()), true);
-            } else if(template.compareTo(EmailTemplateSelector.TRELLO_CARD_EMAIL) == 0){
-                messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
-            }
+            messageHelper.setText(getMailHtmlTextForTemplateSelector(mail.getMessage(), template), true);
         };
+    }
+
+    private String getMailHtmlTextForTemplateSelector(String message, EmailTemplateSelector template) {
+        if (template == EmailTemplateSelector.SCHEDULED_EMAIL) {
+            return mailCreatorService.buildScheduledEmail(message);
+        } else if (template == EmailTemplateSelector.TRELLO_CARD_EMAIL) {
+            return mailCreatorService.buildTrelloCardEmail(message);
+        }
+        return "";
     }
 
     private SimpleMailMessage createMailMessage(final Mail mail) {
