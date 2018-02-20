@@ -25,6 +25,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,20 +36,21 @@ public class SimpleEmailServiceTest {
     @InjectMocks
     private SimpleEmailService simpleEmailService;
 
+    @Mock
+    private JavaMailSender javaMailSender;
+
     @Test
     public void shouldSendDailyEmail() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         //Given
         Mail mail = new Mail("test@test.com", "Test", "Test message");
-
         EmailTemplateSelector template = EmailTemplateSelector.SCHEDULED_EMAIL;
 
-        Class<?>[] params1 = new Class<?>[]{Mail.class, EmailTemplateSelector.class};
-        Method cmm = simpleEmailService.getClass().getDeclaredMethod("createMimeMessage", params1);
-        cmm.setAccessible(true);
+        //When
+        simpleEmailService.send(mail,template);
 
-        //when & then
-        assertNotNull(cmm.invoke(simpleEmailService, mail, template).equals(null));
+        //Then
+        verify(javaMailSender, times(1)).send(any(MimeMessagePreparator.class));
     }
 
     @Test
@@ -56,14 +58,12 @@ public class SimpleEmailServiceTest {
 
         //Given
         Mail mail = new Mail("test@test.com", "cctest@test.com", "Test", "Test message");
-
         EmailTemplateSelector template = EmailTemplateSelector.TRELLO_CARD_EMAIL;
 
-        Class<?>[] params1 = new Class<?>[]{Mail.class, EmailTemplateSelector.class};
-        Method cmm = simpleEmailService.getClass().getDeclaredMethod("createMimeMessage", params1);
-        cmm.setAccessible(true);
+        //When
+        simpleEmailService.send(mail,template);
 
-        //when & then
-        assertNotNull(cmm.invoke(simpleEmailService, mail, template).equals(null));
+        //Then
+        verify(javaMailSender, times(1)).send(any(MimeMessagePreparator.class));
     }
 }

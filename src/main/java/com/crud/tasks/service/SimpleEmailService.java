@@ -44,12 +44,14 @@ public class SimpleEmailService {
     }
 
     private String getMailHtmlTextForTemplateSelector(String message, EmailTemplateSelector template) {
-        if (template == EmailTemplateSelector.SCHEDULED_EMAIL) {
-            return mailCreatorService.buildScheduledEmail(message);
-        } else if (template == EmailTemplateSelector.TRELLO_CARD_EMAIL) {
-            return mailCreatorService.buildTrelloCardEmail(message);
+        switch (template) {
+            case SCHEDULED_EMAIL:
+                return mailCreatorService.buildScheduledEmail(message);
+            case TRELLO_CARD_EMAIL:
+                return mailCreatorService.buildTrelloCardEmail(message);
+            default:
+                return message;
         }
-        return "";
     }
 
     private SimpleMailMessage createMailMessage(final Mail mail) {

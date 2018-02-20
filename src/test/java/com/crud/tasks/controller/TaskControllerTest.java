@@ -81,8 +81,7 @@ public class TaskControllerTest {
         //When & Then
         mockMvc.perform(get("/v1/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .param("taskId", "1"))
+                .characterEncoding("UTF-8"))
                 .andExpect(status().isNotFound());
     }
 
@@ -98,8 +97,7 @@ public class TaskControllerTest {
         //When & Then
         mockMvc.perform(get("/v1/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .param("taskId", "1"))
+                .characterEncoding("UTF-8"))
                 .andExpect(status().is(200))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.title", is("Test")))
@@ -129,8 +127,7 @@ public class TaskControllerTest {
         //When & Then
         mockMvc.perform(delete("/v1/tasks/1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .param("taskId", "1"))
+                .characterEncoding("UTF-8"))
                 .andExpect(status().is(200));
     }
 
